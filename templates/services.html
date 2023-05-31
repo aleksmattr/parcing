@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div id="wrapper">
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <a href="#menu-toggle" class="menuopener" id="menu-toggle"><i class="fa fa-bars"></i></a>
+            <div id="services" class="section lb">
+                <div class="container-fluid">
+                    <div class="row">
+                        {%for i in data %}
+                        <div class=" card col-md-6">
+                            <div class="service-wrap clearfix">
+                                <h6 class="card_status">{{ i.online }}</h6>
+                                <a href="{{ i.link }}"> <h4 class="card_title">{{ i.name }}</h4> </a>
+                                <h4 class="card_title-info">{{ i.zp }}</h4>
+                                <p>{{ i.company }} <br>
+                                    {{ i.city}}
+                                </p>
+                            </div><!-- end issue -->
+
+                        </div><!-- end col -->
+                        {% endfor %}
+                    </div>
+                </div><!-- end container -->
+            </div><!-- end section -->
+        </div>
+    </div>
+
+
+{% endblock %}

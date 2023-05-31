@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+     <!-- Site Metas -->
+    <title>None</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Colors CSS -->
+    <link rel="stylesheet" href="{% static 'colors.css' %}">
+    <!-- ALL VERSION CSS -->
+    <link rel="stylesheet" href="{% static 'versions.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'custom.css' %}">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="barber_version">
+    <header class="header">
+        <div class="container">
+            <div class="col-md-6">
+                <a href="{% url 'chatgpt' %}"><h2>ChatGPT</h2></a>
+                <a href="{% url 'home' %}"><h2>HeadHunter</h2></a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" ><h3>LOGOUT</h3></a>
+                {% else %}
+                <div class="registr"><a href="{% url 'login' %}">Login</a>
+                      <a href="{% url 'register' %}">Register</a>
+                    </div>
+                        {% endif %}
+            </div>
+        </div>
+    </header>
+
+     <section class="ftco-section" style="padding-top: 10%;">
+		<div class="container">
+			<div class=" form row d-flex flex-column justify-content-center">
+                <h1>ChatGPT — чат-бот с искусственным интеллектом</h1>
+            <form action="{% url 'chatgpt' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="text" placeholder="Задайте вопрос">
+                <button type="submit">Отправить</button>
+            </form>
+                {{ response_text }}
+
+            </div>
+		</div>
+	</section>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    (function($) {
+        "use strict";
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        smoothScroll.init({
+            selector: '[data-scroll]', // Selector for links (must be a class, ID, data attribute, or element tag)
+            selectorHeader: null, // Selector for fixed headers (must be a valid CSS selector) [optional]
+            speed: 500, // Integer. How fast to complete the scroll in milliseconds
+            easing: 'easeInOutCubic', // Easing pattern to use
+            offset: 0, // Integer. How far to offset the scrolling anchor location in pixels
+            callback: function ( anchor, toggle ) {} // Function to run after scrolling
+        });
+    })(jQuery);
+    </script>
+
+</body>
+</html>

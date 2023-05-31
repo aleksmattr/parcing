@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section class="ftco-section" style="padding-top: 10%;">
+		<div class="container">
+			<div class=" form row d-flex flex-column justify-content-center">
+                <h3 class="mb-4">Registration</h3>
+							<form action="{% url 'register' %}" method="POST">
+								{%csrf_token%}
+                <div class="form-group">
+                    <label class="label" for="name">First Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="first_name" id="first_name"required>
+                </div>
+
+                <div class="form-group">
+                    <label class="label" for="name">Last Name</label>
+                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="label" for="name">Username</label>
+                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="label" for="name">Email</label>
+                    <input type="text" class="form-control" placeholder="Email"  name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="label" for="password">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password1" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="label" for="password">Confirm Password</label>
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="password2" required>
+                </div>
+
+                <div class="form-group mt-3">
+                    <div class="text-center">
+                        <button type="submit">Register</button>
+                        <p class="text-center">Already a member? <a href="{% url 'login' %}">LOGIN</a></p>
+                    </div>
+                </div>
+
+			</div>
+		</div>
+		</div>
+	</section>
+{% endblock %}

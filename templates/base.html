@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+     <!-- Site Metas -->
+    <title>None</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Colors CSS -->
+    <link rel="stylesheet" href="{% static 'colors.css' %}">
+    <!-- ALL VERSION CSS -->
+    <link rel="stylesheet" href="{% static 'versions.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'custom.css' %}">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="barber_version">
+    <header class="header">
+        <div class="container">
+            <div class="col-md-6">
+                <a href="{% url 'chatgpt' %}"><h2>ChatGPT</h2></a>
+                <a href="{% url 'home' %}"><h2>HeadHunter</h2></a>
+                <form action="{% url 'search' %}" method="POST">
+                    {%csrf_token%}
+                    <div class="search">
+                <select name="city" id="" class="form-select">
+                    {%for i in cities %}
+                        <option value="{{ i.id }}">{{ i.name }}</option>
+                    {% endfor %}}
+                </select>
+
+                        <div class="search_input">
+                            <input type="text" name="s" placeholder="Искать" />
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.17881 12.9753C8.53536 12.9753 9.80202 12.534 10.8317 11.7985L14.7052 15.6721C14.885 15.8518 15.122 15.9417 15.3672 15.9417C15.8983 15.9417 16.2824 15.5331 16.2824 15.0101C16.2824 14.765 16.2007 14.5362 16.0209 14.3564L12.1719 10.4992C12.9809 9.43682 13.4631 8.12112 13.4631 6.69102C13.4631 3.23426 10.6356 0.406746 7.17881 0.406746C3.71388 0.406746 0.894531 3.23426 0.894531 6.69102C0.894531 10.1478 3.71388 12.9753 7.17881 12.9753ZM7.17881 11.6187C4.47387 11.6187 2.25109 9.38779 2.25109 6.69102C2.25109 3.99426 4.47387 1.7633 7.17881 1.7633C9.87557 1.7633 12.1065 3.99426 12.1065 6.69102C12.1065 9.38779 9.87557 11.6187 7.17881 11.6187Z" fill="#333333"></path>
+                            </svg>
+                        </div>
+                                <button id="search_btn">
+                                    Поиск
+                                </button>
+                    </div>
+                </form>
+
+
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" ><h3>LOGOUT</h3></a>
+                {% else %}
+                <div class="registr"><a href="{% url 'login' %}">Login</a>
+                      <a href="{% url 'register' %}">Register</a>
+                    </div>
+                        {% endif %}
+            </div>
+        </div>
+    </header>
+{% block content %}
+{% endblock %}
+
+    <!-- Menu Toggle Script -->
+    <script>
+    (function($) {
+        "use strict";
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        smoothScroll.init({
+            selector: '[data-scroll]', // Selector for links (must be a class, ID, data attribute, or element tag)
+            selectorHeader: null, // Selector for fixed headers (must be a valid CSS selector) [optional]
+            speed: 500, // Integer. How fast to complete the scroll in milliseconds
+            easing: 'easeInOutCubic', // Easing pattern to use
+            offset: 0, // Integer. How far to offset the scrolling anchor location in pixels
+            callback: function ( anchor, toggle ) {} // Function to run after scrolling
+        });
+    })(jQuery);
+    </script>
+
+</body>
+</html>
